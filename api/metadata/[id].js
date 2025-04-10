@@ -2014,6 +2014,10 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(metadataMap[id]);
     const json = await response.json();
+
+     // Inject proper name if missing or wrong
+    json.name = `basedFOREST ${id}`;
+    
     res.setHeader("Cache-Control", "public, max-age=3600");
     return res.status(200).json(json);
   } catch (err) {
